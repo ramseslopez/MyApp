@@ -22,6 +22,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.myapp.R;
 import com.example.myapp.ui.login.LoginViewModel;
 import com.example.myapp.ui.login.LoginViewModelFactory;
@@ -30,8 +36,30 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
 
+    RequestQueue queue;
+    String url = "https://www.lamarr.com.mx/webservice2.php/";
+    StringRequest stringRequest;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        final TextView textView = (TextView) findViewById(R.id.text);
+
+        queue = Volley.newRequestQueue(this);
+
+        stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                // Display the first 500 characters of the response string.
+                textView.setText("Response is: "+ response.substring(0,500));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                textView.setText("That didn't work!");
+            }
+        });
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
@@ -112,11 +140,22 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                if (usernameEditText.getText().toString().equals("ciencias@ciencias.unam.mx") &&
+                    passwordEditText.getText().toString().equals("1234")) {
+                    loadingProgressBar.setVisibility(View.VISIBLE);
+
+                    loginViewModel.login(usernameEditText.getText().toString(),
+                            passwordEditText.getText().toString());
+
+                    queue.add(stringRequest);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Intentelo de nuevo", Toast.LENGTH_LONG).show();
+                }
             }
         });
+
+
+
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
