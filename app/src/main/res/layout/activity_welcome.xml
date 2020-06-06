@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Welcome">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="335dp"
+        android:layout_height="664dp"
+        android:text="https://www.youtube.com/watch?v=fCn8zs912OE \n\n https://www.youtube.com/watch?v=buVUvnM_AzU \n\n https://www.youtube.com/watch?v=BIePWBgKaXw \n\n https://www.youtube.com/watch?v=tpIctyqH29Q&amp;list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo \n\n https://www.youtube.com/watch?v=YMPzDiraNnA \n\n https://www.youtube.com/watch?v=7DZLlwm8-ow google.streetview:cbll=46.414382,10.013988 geo:37.7749,-122.4194 geo:0,0?q=restaurants \n\n https://www.android.com/ google.navigation:q=Universidad+Nacional+Autonoma+de+Mexico,+Mexico"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

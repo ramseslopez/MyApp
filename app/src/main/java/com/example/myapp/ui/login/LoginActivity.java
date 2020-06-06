@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myapp.R;
+import com.example.myapp.Welcome;
 import com.example.myapp.ui.login.LoginViewModel;
 import com.example.myapp.ui.login.LoginViewModelFactory;
 
@@ -51,12 +53,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 // Display the first 500 characters of the response string.
-                textView.setText("Response is: "+ response.substring(0,500));
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                textView.setText("That didn't work!");
+                
             }
         });
 
@@ -148,8 +150,12 @@ public class LoginActivity extends AppCompatActivity {
                             passwordEditText.getText().toString());
 
                     queue.add(stringRequest);
+
+                    Intent intent = new Intent(LoginActivity.this, Welcome.class);
+                    startActivity(intent);
+
                 } else {
-                    Toast.makeText(LoginActivity.this, "Intentelo de nuevo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Inténtelo de nuevo", Toast.LENGTH_LONG).show();
                 }
             }
         });
